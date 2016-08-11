@@ -11,31 +11,41 @@ import java.util.List;
  */
 public class SearchPage extends BasePage {
 
-    public SearchPage (WebDriver driver){
+    public SearchPage(WebDriver driver) {
         super(driver);
     }
 
-    @FindBy (xpath = "//div[@class='g-price-uah']")
-    private List<String> allPrices;
+    @FindBy(xpath = "//div[@class='g-price-uah']")
+    private List<WebElement> allPrices;
 
-    @FindBy (xpath = "//button[@class='btn-link-i']")
+    @FindBy(xpath = "//button[@class='btn-link-i']")
     private List<WebElement> allButtonBuy;
 
-    public int quantityOfPrices (){
+    public int quantityOfPrices() {
         return allPrices.size();
     }
 
-    public void findPrice () {
-        System.out.println(allPrices);
+    public void findPrice() {
 
-        for (Object elem : allPrices) {
-            String str = elem.toString();
-            str = str.replace("грн", "").trim();
-            int newInt = Integer.valueOf(str);
-            System.out.println(newInt);
+
+        //System.out.println(allPrices);
+
+        for (WebElement elem : allPrices) {
+            String str = elem.getText();
+            str = str.replace("грн", "").replace(" ", "").trim();
+            //System.out.println(str);
+
+            try {
+                int newInt = Integer.valueOf(str);
+                System.out.println(newInt);
+            } catch (NumberFormatException ex) {
+                System.err.println("Неверный формат строки!");
+            }
+
         }
 
     }
+}
              //(allPrices > 10000)
 
 
@@ -69,4 +79,4 @@ public class SearchPage extends BasePage {
 
         //}
 
-    }
+
