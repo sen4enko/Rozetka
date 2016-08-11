@@ -19,8 +19,8 @@ public class BaseTest {
 
     public BaseTest(){
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\vitalii.senchenko\\Desktop\\Projects\\chromedriver.exe");
-       driver = new ChromeDriver();
-        //driver = new FirefoxDriver();
+       //driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         baseUrl = "http://rozetka.com.ua/";
         page = new BasePage(driver);
         driver.get(baseUrl);
