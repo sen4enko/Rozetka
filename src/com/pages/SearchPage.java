@@ -1,5 +1,6 @@
 package com.pages;
 
+import org.bouncycastle.math.ec.ECCurve;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,11 +33,15 @@ public class SearchPage extends BasePage {
 
         for (WebElement elem : allPrices) {
             String str = elem.getText();
-            str = str.replace("грн", "").replace(" ", "").trim();
-            //System.out.println(str);
+            //str = str.replace("грн", "");
+            str =  str.replace(" ", "");
+            int lengt = str.length();
+            lengt = lengt - 4;
+            str = String.valueOf(str.subSequence(0,lengt));
+             str = str.trim();
 
             try {
-                int newInt = Integer.valueOf(str);
+                float newInt = Float.valueOf(str);
                 System.out.println(newInt);
             } catch (NumberFormatException ex) {
                 System.err.println("Неверный формат строки!");
