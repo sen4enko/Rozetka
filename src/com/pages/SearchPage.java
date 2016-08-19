@@ -29,9 +29,9 @@ public class SearchPage extends BasePage {
 
     public void findPrice() throws InterruptedException {
 
-
+        int i = 0;
         //System.out.println(allPrices);
-
+        while (i < allPrices.size()) {
             for (WebElement elem : allPrices) {
 
                 String str = elem.getText();
@@ -51,22 +51,24 @@ public class SearchPage extends BasePage {
                     System.err.println("Неверный формат строки!");
                 }
 
+
                 if (newPrice > 20000) {
                     //String buttonName = allButtonBuy.get(a).getText();
                     // driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 
                     //  Boolean b = allButtonBuy.get(a).isDisplayed();
-                    String buttonName = allButtonBuy.get(sum).getText();
+                    String buttonName = allButtonBuy.get(i).getText();
                     System.out.println(buttonName);
-                    allButtonBuy.get(sum).click();
+                    allButtonBuy.get(i).click();
 
 
                 }
+                i++;
             }
 
         }
     }
-
+}
 
 
 
