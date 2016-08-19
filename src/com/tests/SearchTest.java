@@ -11,10 +11,14 @@ import org.openqa.selenium.WebDriver;
 public class SearchTest extends BaseTest {
 
     @Test
-    public void searchTest (){
+    public void searchTest () throws InterruptedException {
         HomePage homePage = page.createPage(HomePage.class);
         SearchPage searchPage =  homePage.searchProducts("Samsung");
-        searchPage.findPrice();
+        try {
+            searchPage.findPrice();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //searchPage.addGoodstoBacket();
     }
 

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by User on 10.05.16.
@@ -19,38 +20,59 @@ public class SearchPage extends BasePage {
     @FindBy(xpath = "//div[@class='g-price-uah']")
     private List<WebElement> allPrices;
 
-    @FindBy(xpath = "//button[@class='btn-link-i']")
+    @FindBy(xpath = "//div [@class='g-tools-container']//button[@type='submit']")
     private List<WebElement> allButtonBuy;
 
     public int quantityOfPrices() {
         return allPrices.size();
     }
 
-    public void findPrice() {
+    public void findPrice() throws InterruptedException {
 
 
         //System.out.println(allPrices);
 
-        for (WebElement elem : allPrices) {
-            String str = elem.getText();
-            //str = str.replace("грн", "");
-            str =  str.replace(" ", "");
-            int lengt = str.length();
-            lengt = lengt - 4;
-            str = String.valueOf(str.subSequence(0,lengt));
-             str = str.trim();
+            for (WebElement elem : allPrices) {
 
-            try {
-                float newInt = Float.valueOf(str);
-                System.out.println(newInt);
-            } catch (NumberFormatException ex) {
-                System.err.println("Неверный формат строки!");
+                String str = elem.getText();
+
+                //str = str.replace("грн", "");
+                str = str.replace(" ", "");
+                int lengt = str.length();
+                lengt = lengt - 4;
+                str = String.valueOf(str.subSequence(0, lengt));
+                str = str.trim();
+
+                float newPrice = 0;
+                try {
+                    newPrice = Float.valueOf(str);
+                    // System.out.println(newPrice);
+                } catch (NumberFormatException ex) {
+                    System.err.println("Неверный формат строки!");
+                }
+
+                if (newPrice > 20000) {
+                    //String buttonName = allButtonBuy.get(a).getText();
+                    // driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+
+                    //  Boolean b = allButtonBuy.get(a).isDisplayed();
+                    String buttonName = allButtonBuy.get(sum).getText();
+                    System.out.println(buttonName);
+                    allButtonBuy.get(sum).click();
+
+
+                }
             }
 
         }
-
     }
-}
+
+
+
+
+
+
+
              //(allPrices > 10000)
 
 
