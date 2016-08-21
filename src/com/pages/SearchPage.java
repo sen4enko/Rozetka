@@ -1,9 +1,12 @@
 package com.pages;
 
 import org.bouncycastle.math.ec.ECCurve;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +25,9 @@ public class SearchPage extends BasePage {
 
     @FindBy(xpath = "//div [@class='g-tools-container']//button[@type='submit']")
     private List<WebElement> allButtonBuy;
+
+    @FindBy(xpath = "//a [@class='popup-close']")
+    private WebElement popUpClose;
 
     public int quantityOfPrices() {
         return allPrices.size();
@@ -60,6 +66,15 @@ public class SearchPage extends BasePage {
                     String buttonName = allButtonBuy.get(i).getText();
                     System.out.println(buttonName);
                     allButtonBuy.get(i).click();
+                    WebElement myDynamicElement = (new WebDriverWait(driver, 10))
+                            .until(new ExpectedCondition<WebElement>(){
+                                @Override
+                                public WebElement apply(WebDriver d) {
+                                    return d.findElement(By.xpath("//a [@class='popup-close']"));
+                                }});
+                    System.out.println(popUpClose.getTagName());
+                    popUpClose.click();
+
 
 
                 }
