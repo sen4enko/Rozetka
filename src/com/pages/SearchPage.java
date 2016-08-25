@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -66,17 +67,11 @@ public class SearchPage extends BasePage {
                     String buttonName = allButtonBuy.get(i).getText();
                     System.out.println(buttonName);
                     allButtonBuy.get(i).click();
-                    WebElement myDynamicElement = (new WebDriverWait(driver, 10))
-                            .until(new ExpectedCondition<WebElement>(){
-                                @Override
-                                public WebElement apply(WebDriver d) {
-                                    return d.findElement(By.xpath("//a [@class='popup-close']"));
-                                }});
+
+                    WebDriverWait wait = new WebDriverWait(driver,30);
+                    wait.until(ExpectedConditions.visibilityOf(popUpClose));
                     System.out.println(popUpClose.getTagName());
                     popUpClose.click();
-
-
-
                 }
                 i++;
             }

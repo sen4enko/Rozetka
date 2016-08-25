@@ -18,7 +18,8 @@ public class BaseTest {
     protected BasePage page;
 
     public BaseTest(){
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\vitalii.senchenko\\Desktop\\Projects\\chromedriver.exe");
+       System.setProperty("wedriver.chrome.drivew", "C:\\drivers\\chromedriver_win32\\chromedriver.exe");
+       // System.setProperty("webdriver.chrome.driver", "C:\\Users\\vitalii.senchenko\\Desktop\\Projects\\chromedriver.exe");
        driver = new ChromeDriver();
         //driver = new FirefoxDriver();
         baseUrl = "http://rozetka.com.ua/";
